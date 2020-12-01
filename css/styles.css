@@ -14,6 +14,7 @@
   --social-bg-color: rgba(255, 255, 255, 0.1);
   --logo-color: #afb1b8;
   --overlay-bg-color: rgba(47, 48, 58, 0.8);
+  --timing-func: cubic-bezier(0.4, 0, 0.2, 1);
 }
 html {
   box-sizing: border-box;
@@ -124,23 +125,28 @@ img {
   letter-spacing: 0.02em;
   text-decoration: none;
   text-transform: capitalize;
+  transition: color 250ms var(--timing-func);
 }
-.site-nav .link:hover,
-.site-nav .link:focus,
 .site-nav .link.current {
   color: var(--accent-color);
 }
-.site-nav .link:hover::after,
-.site-nav .link.current::after {
+.site-nav .link:hover,
+.site-nav .link:focus {
+  color: var(--accent-color);
+}
+.site-nav .link::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
-  display: block;
+  display: none;
   width: 100%;
   height: 4px;
   border-radius: 2px;
   background-color: var(--accent-color);
+}
+.site-nav .link.current::after {
+  display: block;
 }
 
 .header-address {
@@ -162,6 +168,7 @@ img {
   line-height: 1.15;
   letter-spacing: 0.02em;
   text-decoration: none;
+  transition: color 250ms var(--timing-func);
 }
 .contacts .link:hover,
 .contacts .link:focus {
@@ -170,6 +177,7 @@ img {
 .header-icon {
   margin-right: 10px;
   fill: var(--secondary-text-color);
+  transition: fill 250ms var(--timing-func);
 }
 .icon-message {
   width: 16px;
@@ -225,6 +233,7 @@ img {
   padding: 10px 32px;
   border: none;
   outline: none;
+  transition: background-color 250ms var(--timing-func), color 250ms var(--timing-func);
 }
 
 .button:hover,
@@ -377,6 +386,7 @@ img {
   background-position: center;
   justify-content: center;
   align-items: center;
+  transition: background-color 250ms var(--timing-func);
 }
 .employee-link:hover,
 .employee-link:focus {
@@ -387,6 +397,7 @@ img {
   width: 20px;
   height: 20px;
   fill: currentColor;
+  transition: fill 250ms var(--timing-func);
 }
 .employee-link:hover .employee-icon,
 .employee-link:focus .employee-icon {
@@ -409,6 +420,7 @@ img {
   width: 170px;
   height: 90px;
   color: var(--secondary-text-color);
+  transition: border-color 250ms var(--timing-func);
 }
 .client-link:hover,
 .client-link:focus {
@@ -417,6 +429,7 @@ img {
 
 .icon-client {
   fill: currentColor;
+  transition: fill 250ms var(--timing-func);
 }
 .icon-logo-1 {
   width: 44.27px;
@@ -507,6 +520,7 @@ img {
   background-position: center;
   justify-content: center;
   align-items: center;
+  transition: background-color 250ms var(--timing-func);
 }
 .social-link:hover,
 .social-link:focus {
@@ -547,12 +561,13 @@ img {
   line-height: 1.62;
   text-align: center;
   padding: 6px 22px;
+  cursor: pointer;
+  transition: background-color 250ms var(--timing-func), color 250ms var(--timing-func), box-shadow 250ms var(--timing-func);
 }
 .filter-button:hover,
 .filter-button:focus {
   background-color: var(--accent-color);
   color: var(--white-color);
-  cursor: pointer;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 .filter-button.current {
@@ -576,18 +591,14 @@ img {
   margin-bottom: 30px;
 } */
 .portfolio-link {
-  position: relative;
   display: block;
   text-decoration: none;
+  transition: box-shadow 250ms var(--timing-func);
 }
 
 .portfolio-link:hover .card-container,
 .portfolio-link:focus .card-container {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
-}
-.portfolio-link:hover .card-info,
-.portfolio-link:focus .card-info {
-  display: block;
 }
 .card-container {
   background: var(--primary-background-color);
@@ -622,6 +633,10 @@ img {
 .card-text::first-letter {
   text-transform: uppercase;
 }
+.imgblock {
+  position: relative;
+  overflow: hidden;
+}
 .card-info {
   position: absolute;
   top: 0;
@@ -629,8 +644,17 @@ img {
   right: 0;
   min-height: 294px;
   background-color: var(--accent-bg-info);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   padding: 63px 24px;
-  display: none;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 250ms var(--timing-func), opacity 250ms var(--timing-func);
+}
+.portfolio-link:hover .card-info,
+.portfolio-link:focus .card-info {
+  opacity: 1;
+  transform: translateY(0%);
 }
 .info-text {
   font-size: 18px;
@@ -670,6 +694,7 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   background-color: var(--white-color);
+  cursor: pointer;
 }
 .icon-close {
   position: absolute;
@@ -679,6 +704,7 @@ img {
   width: 18px;
   height: 18px;
   fill: #000000;
+  transition: fill 250ms var(--timing-func);
 }
 .btn-close:hover .icon-close {
   fill: var(--accent-color);
